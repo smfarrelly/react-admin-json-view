@@ -1,7 +1,7 @@
-# React Admin JSON view ![GitHub release (latest by date)](https://img.shields.io/github/v/release/MrHertal/react-admin-json-view) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/MrHertal/react-admin-json-view/Node.js%20CI)
+# React Admin JSON view
 
 JSON field and input for [react-admin](https://github.com/marmelab/react-admin).
-Built with [react-json-view](https://github.com/mac-s-g/react-json-view).
+Built with [@textea/json-viewer](https://github.com/TexteaInc/json-viewer).
 
 Field:
 
