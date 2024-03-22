@@ -18,7 +18,7 @@ export const JsonField: React.FC<Props> = ({
   let data = record[source];
 
   if (jsonString) {
-    data = JSON.parse(src);
+    data = JSON.parse(data);
   }
 
   return <JsonEditor {...jsonEditorOptions} data={data || {}} />;

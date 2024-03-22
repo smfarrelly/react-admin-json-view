@@ -27,21 +27,21 @@ export const JsonInput: React.FC<Props> = (props) => {
     jsonEditorOptions,
   } = props;
 
-  function change(updatedSrc: any) {
-    let updatedValue = updatedSrc;
+  function change(updatedData: any) {
+    let updatedValue = updatedData;
 
     if (jsonString) {
       updatedValue =
-        Object.keys(updatedSrc).length === 0
+        Object.keys(updatedData).length === 0
           ? null
-          : JSON.stringify(updatedSrc);
+          : JSON.stringify(updatedData);
     }
 
     onChange(updatedValue);
   }
 
   function onEdit(edit: UpdateFunction) {
-    change(edit.updated_src);
+    change(edit.newData);
 
     if (jsonEditorOptions?.onEdit) {
       jsonEditorOptions.onEdit(edit);
@@ -49,7 +49,7 @@ export const JsonInput: React.FC<Props> = (props) => {
   }
 
   function onAdd(add: UpdateFunction) {
-    change(add.updated_src);
+    change(add.newData);
 
     if (jsonEditorOptions?.onAdd) {
       jsonEditorOptions.onAdd(add);
@@ -57,7 +57,7 @@ export const JsonInput: React.FC<Props> = (props) => {
   }
 
   function onDelete(del: UpdateFunction) {
-    change(del.updated_src);
+    change(del.newData);
 
     if (jsonEditorOptions?.onDelete) {
       jsonEditorOptions.onDelete(del);
