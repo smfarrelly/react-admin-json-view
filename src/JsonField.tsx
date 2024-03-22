@@ -1,6 +1,6 @@
 import React from "react";
 import { FieldProps, useRecordContext } from "react-admin";
-import ReactJson, { ReactJsonViewProps } from "@textea/json-viewer";
+import ReactJson, { ReactJsonViewProps } from "react-json-view";
 
 type Props = {
   source: string;

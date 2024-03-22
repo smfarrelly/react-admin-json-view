@@ -4,7 +4,7 @@ import { InputHelperText, InputProps, Labeled, useInput } from "react-admin";
 import ReactJson, {
   InteractionProps,
   ReactJsonViewProps,
-} from "@textea/json-viewer";
+} from "react-json-view";
 
 type Props = {
   source: string;
