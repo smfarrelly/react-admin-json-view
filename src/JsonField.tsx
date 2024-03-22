@@ -1,11 +1,11 @@
 import React from "react";
 import { FieldProps, useRecordContext } from "react-admin";
-import JsonViewer, { JsonViewerProps } from "@textea/json-viewer";
+import ReactJson, { ReactJsonViewProps } from "@textea/json-viewer";
 
 type Props = {
   source: string;
   jsonString?: boolean;
-  reactJsonOptions?: Omit<JsonViewerProps, "src">;
+  reactJsonOptions?: Omit<ReactJsonViewProps, "src">;
 } & FieldProps;
 
 export const JsonField: React.FC<Props> = ({
@@ -21,5 +21,5 @@ export const JsonField: React.FC<Props> = ({
     src = JSON.parse(src);
   }
 
-  return <JsonViewer {...reactJsonOptions} src={src || {}} />;
+  return <ReactJson {...reactJsonOptions} src={src || {}} />;
 };

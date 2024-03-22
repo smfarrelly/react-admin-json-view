@@ -1,9 +1,9 @@
 import { FormHelperText } from "@mui/material";
 import React from "react";
 import { InputHelperText, InputProps, Labeled, useInput } from "react-admin";
-import JsonViewer, {
-  DataItemProps,
-  JsonViewerProps,
+import ReactJson, {
+  InteractionProps,
+  ReactJsonViewProps,
 } from "@textea/json-viewer";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   label?: string;
   helperText?: string;
   jsonString?: boolean;
-  reactJsonOptions?: Omit<JsonViewerProps, "src">;
+  reactJsonOptions?: Omit<ReactJsonViewProps, "src">;
 } & InputProps;
 
 export const JsonInput: React.FC<Props> = (props) => {
@@ -43,7 +43,7 @@ export const JsonInput: React.FC<Props> = (props) => {
     onChange(updatedValue);
   }
 
-  function onEdit(edit: DataItemProps) {
+  function onEdit(edit: InteractionProps) {
     change(edit.updated_src);
 
     if (reactJsonOptions?.onEdit) {
@@ -51,7 +51,7 @@ export const JsonInput: React.FC<Props> = (props) => {
     }
   }
 
-  function onAdd(add: DataItemProps) {
+  function onAdd(add: InteractionProps) {
     change(add.updated_src);
 
     if (reactJsonOptions?.onAdd) {
@@ -59,7 +59,7 @@ export const JsonInput: React.FC<Props> = (props) => {
     }
   }
 
-  function onDelete(del: DataItemProps) {
+  function onDelete(del: InteractionProps) {
     change(del.updated_src);
 
     if (reactJsonOptions?.onDelete) {
@@ -76,7 +76,7 @@ export const JsonInput: React.FC<Props> = (props) => {
   return (
     <div>
       <Labeled source={source} label={label} isRequired={isRequired}>
-        <JsonViewer
+        <ReactJson
           {...reactJsonOptions}
           src={src || {}}
           onEdit={reactJsonOptions?.onEdit === false ? false : onEdit}
