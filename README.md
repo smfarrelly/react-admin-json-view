@@ -30,12 +30,11 @@ export const ExampleShow = (props) => (
       <JsonField
         source="example"
         jsonString={false} // Set to true if the value is a string, default: false
-        reactJsonOptions={{
-          // Props passed to react-json-view
-          name: null,
-          collapsed: true,
+        jsonEditorOptions={{
+          // Props passed to json-edit-react
+          rootName: null,
+          collapse: true,
           enableClipboard: false,
-          displayDataTypes: false,
         }}
       />
     </SimpleShowLayout>
@@ -49,12 +48,11 @@ export const ExampleEdit = (props) => (
         source="example"
         validate={[required()]}
         jsonString={false} // Set to true if the value is a string, default: false
-        reactJsonOptions={{
-          // Props passed to react-json-view
-          name: null,
-          collapsed: true,
+        jsonEditorOptions={{
+          // Props passed to json-edit-react
+          rootName: null,
+          collapse: true,
           enableClipboard: false,
-          displayDataTypes: false,
         }}
       />
     </SimpleForm>

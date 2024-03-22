@@ -1,25 +1,25 @@
 import React from "react";
 import { FieldProps, useRecordContext } from "react-admin";
-import ReactJson, { ReactJsonViewProps } from "react-json-view";
+import { JsonEditor, JsonEditorProps } from "json-edit-react";
 
 type Props = {
   source: string;
   jsonString?: boolean;
-  reactJsonOptions?: Omit<ReactJsonViewProps, "src">;
+  jsonEditorOptions?: Omit<JsonEditorProps, "data">;
 } & FieldProps;
 
 export const JsonField: React.FC<Props> = ({
   source,
   jsonString = false,
-  reactJsonOptions = {},
+  jsonEditorOptions = {},
 }) => {
   const record = useRecordContext();
 
-  let src = record[source];
+  let data = record[source];
 
   if (jsonString) {
-    src = JSON.parse(src);
+    data = JSON.parse(src);
   }
 
-  return <ReactJson {...reactJsonOptions} src={src || {}} />;
+  return <JsonEditor {...jsonEditorOptions} data={data || {}} />;
 };

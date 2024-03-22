@@ -1,17 +1,14 @@
 import { FormHelperText } from "@mui/material";
 import React from "react";
 import { InputHelperText, InputProps, Labeled, useInput } from "react-admin";
-import ReactJson, {
-  InteractionProps,
-  ReactJsonViewProps,
-} from "react-json-view";
+import { JsonEditor, JsonEditorProps, UpdateFunction } from "json-edit-react";
 
 type Props = {
   source: string;
   label?: string;
   helperText?: string;
   jsonString?: boolean;
-  reactJsonOptions?: Omit<ReactJsonViewProps, "src">;
+  jsonEditorOptions?: Omit<JsonEditorProps, "data">;
 } & InputProps;
 
 export const JsonInput: React.FC<Props> = (props) => {
@@ -27,7 +24,7 @@ export const JsonInput: React.FC<Props> = (props) => {
     label,
     helperText,
     jsonString = false,
-    reactJsonOptions,
+    jsonEditorOptions,
   } = props;
 
   function change(updatedSrc: any) {
@@ -43,45 +40,45 @@ export const JsonInput: React.FC<Props> = (props) => {
     onChange(updatedValue);
   }
 
-  function onEdit(edit: InteractionProps) {
+  function onEdit(edit: UpdateFunction) {
     change(edit.updated_src);
 
-    if (reactJsonOptions?.onEdit) {
-      reactJsonOptions.onEdit(edit);
+    if (jsonEditorOptions?.onEdit) {
+      jsonEditorOptions.onEdit(edit);
     }
   }
 
-  function onAdd(add: InteractionProps) {
+  function onAdd(add: UpdateFunction) {
     change(add.updated_src);
 
-    if (reactJsonOptions?.onAdd) {
-      reactJsonOptions.onAdd(add);
+    if (jsonEditorOptions?.onAdd) {
+      jsonEditorOptions.onAdd(add);
     }
   }
 
-  function onDelete(del: InteractionProps) {
+  function onDelete(del: UpdateFunction) {
     change(del.updated_src);
 
-    if (reactJsonOptions?.onDelete) {
-      reactJsonOptions.onDelete(del);
+    if (jsonEditorOptions?.onDelete) {
+      jsonEditorOptions.onDelete(del);
     }
   }
 
-  let src = value;
+  let data = value;
 
   if (jsonString) {
-    src = value ? JSON.parse(value) : value;
+    data = value ? JSON.parse(value) : value;
   }
 
   return (
     <div>
       <Labeled source={source} label={label} isRequired={isRequired}>
-        <ReactJson
-          {...reactJsonOptions}
-          src={src || {}}
-          onEdit={reactJsonOptions?.onEdit === false ? false : onEdit}
-          onAdd={reactJsonOptions?.onAdd === false ? false : onAdd}
-          onDelete={reactJsonOptions?.onDelete === false ? false : onDelete}
+        <JsonEditor
+          {...jsonEditorOptions}
+          data={data || {}}
+          onEdit={jsonEditorOptions?.onEdit === false ? false : onEdit}
+          onAdd={jsonEditorOptions?.onAdd === false ? false : onAdd}
+          onDelete={jsonEditorOptions?.onDelete === false ? false : onDelete}
         />
       </Labeled>
       <FormHelperText error={(isTouched || isSubmitted) && !!error}>
