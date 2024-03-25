@@ -2,17 +2,22 @@ import React from "react";
 import { FieldProps, useRecordContext } from "react-admin";
 import { JsonEditor, JsonEditorProps } from "json-edit-react";
 
-type Props = {
+type JsonFieldProps = {
   source: string;
   jsonString?: boolean;
   jsonEditorOptions?: Omit<JsonEditorProps, "data">;
 } & FieldProps;
 
-export const JsonField: React.FC<Props> = ({
+function JsonField({
   source,
   jsonString = false,
-  jsonEditorOptions = {},
-}) => {
+  jsonEditorOptions = {
+    restrictAdd: true,
+    restrictEdit: true,
+    restrictDelete: true,
+    rootName: source,
+  },
+}: JsonFieldProps) {
   const record = useRecordContext();
 
   let data = record[source];
@@ -22,4 +27,6 @@ export const JsonField: React.FC<Props> = ({
   }
 
   return <JsonEditor {...jsonEditorOptions} data={data || {}} />;
-};
+}
+
+export default JsonField;

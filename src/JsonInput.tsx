@@ -3,7 +3,7 @@ import React from "react";
 import { InputHelperText, InputProps, Labeled, useInput } from "react-admin";
 import { JsonEditor, JsonEditorProps, UpdateFunction } from "json-edit-react";
 
-type Props = {
+type JsonInputProps = {
   source: string;
   label?: string;
   helperText?: string;
@@ -11,23 +11,22 @@ type Props = {
   jsonEditorOptions?: Omit<JsonEditorProps, "data">;
 } & InputProps;
 
-export const JsonInput: React.FC<Props> = (props) => {
+function JsonInput({
+  source,
+  label = undefined,
+  helperText = undefined,
+  jsonString = false,
+  jsonEditorOptions = {},
+  ...props
+}: JsonInputProps) {
   const {
     field: { value, onChange },
     fieldState: { isTouched, error },
     formState: { isSubmitted },
     isRequired,
-  } = useInput(props);
+  } = useInput({ ...props, source });
 
-  const {
-    source,
-    label,
-    helperText,
-    jsonString = false,
-    jsonEditorOptions,
-  } = props;
-
-  function change(updatedData: any) {
+  function change(updatedData: unknown) {
     let updatedValue = updatedData;
 
     if (jsonString) {
@@ -90,4 +89,6 @@ export const JsonInput: React.FC<Props> = (props) => {
       </FormHelperText>
     </div>
   );
-};
+}
+
+export default JsonInput;
